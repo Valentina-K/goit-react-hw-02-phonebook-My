@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { Notify } from 'notiflix';
 
 export default class ContactForm extends Component {
   state = {
@@ -23,6 +24,8 @@ export default class ContactForm extends Component {
     if (!this.isUniqueName(this.props.contactItems, name)) {
       this.props.onSubmit({ id: nanoid(), name, number });
       this.reset();
+    } else {
+      Notify.warning(`${name} is already in contacts!`);
     }
   };
 
